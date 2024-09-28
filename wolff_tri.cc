@@ -7,7 +7,7 @@
 
 #include <omp.h>
 
-#include "header2.hpp"
+#include "header.hpp"
 
 
 int main( int argc, char *argv[] ){
