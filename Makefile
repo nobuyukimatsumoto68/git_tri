@@ -16,7 +16,7 @@ DIR = ./
 # all: tt.o eps.o t_vev.o psipsi.o eig.o
 
 # wolff.o: wolff_hex.cc header.hpp
-wolff.o: wolff_tri.cc header.hpp
+wolff.o: wolff_tri.cc header3.hpp
 	$(CXX) $< $(INCLUDES) $(LDFLAGS) $(CXXFLAGS) -o $(DIR)$@
 
 # wolff2.o: wolff_hex2.cc header2.hpp

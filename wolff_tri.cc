@@ -7,7 +7,7 @@
 
 #include <omp.h>
 
-#include "header.hpp"
+#include "header3.hpp"
 
 
 int main( int argc, char *argv[] ){
@@ -82,14 +82,12 @@ int main( int argc, char *argv[] ){
   else s.random();
 
   int ninit = init_label * binsize;
-
   {
     std::ofstream of( description+".log", std::ios::out | std::ios::app );
     if(!of) assert(false);
     of << "Lx = " << Lx << std::endl
        << "Ly = " << Ly << std::endl
        << "nu = " << nu << std::endl
-       // << "beta_c = " << beta_c << std::endl
        << "Nbin = " << Nbin << std::endl
        << "binsize = " << binsize << std::endl
        << "if_read= " << if_read << std::endl
@@ -177,13 +175,15 @@ int main( int argc, char *argv[] ){
   std::vector<Obs<Scalar>*> scalars;
   std::vector<Obs<Corr>*> corrs;
 
+  std::function<bool(const Idx, const Idx)> pt_corr = [](const Idx x, const Idx y){ return is_pt_corr(x,y); };
+  std::function<bool(const Idx, const Idx)> face_corr = [](const Idx x, const Idx y){ return is_face(x,y); };
   Idx x1 = 0, y1 = 0, x2 = Lx/2, y2 = 0;
-  Obs<Corr> ss_corr( "ss_corr", binsize, [](const Spin& s0){ return Corr( s0.ss_corr() ); } );
+  Obs<Corr> ss_corr( "ss_corr", binsize, [](const Spin& s0){ return Corr( s0.ss_corr() ); }, pt_corr);
   corrs.push_back( &ss_corr );
-  // Obs<Scalar> eps_1pt( "eps_1pt", binsize, [](const Spin& s0){ return Scalar( s0.eps_1pt() ); } );
-  // scalars.push_back( &eps_1pt );
-  // Obs<Corr> epseps_corr( "epseps_corr", binsize, [](const Spin& s0){ return Corr( s0.epseps_corr() ); } );
-  // corrs.push_back( &epseps_corr );
+  Obs<Scalar> eps_1pt( "eps_1pt", binsize, [](const Spin& s0){ return Scalar( s0.eps_1pt() ); } );
+  scalars.push_back( &eps_1pt );
+  Obs<Corr> epseps_corr( "epseps_corr", binsize, [](const Spin& s0){ return Corr( s0.epseps_corr() ); }, face_corr );
+  corrs.push_back( &epseps_corr );
   // Obs<Scalar> TA( "TA", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(0) ); } );
   // scalars.push_back( &TA );
   // Obs<Scalar> TB( "TB", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(1) ); } );
