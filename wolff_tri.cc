@@ -45,11 +45,7 @@ int main( int argc, char *argv[] ){
 
   // routine
   const int Nbin = 1e2;
-  const int binsize = 1e3;
-  // const int Nbin = 10;
-  // const int binsize = 1;
-  // const int Nbin = 1e2;
-  // const int binsize = 1e2;
+  const int binsize = 1e4;
 
   const bool if_write = true;
 
@@ -177,45 +173,48 @@ int main( int argc, char *argv[] ){
 
   std::function<bool(const Idx, const Idx)> pt_corr = [](const Idx x, const Idx y){ return is_pt_corr(x,y); };
   std::function<bool(const Idx, const Idx)> face_corr = [](const Idx x, const Idx y){ return is_face(x,y); };
-  Idx x1 = 0, y1 = 0, x2 = Lx/2, y2 = 0;
+  std::function<bool(const Idx, const Idx)> on_site = [](const Idx x, const Idx y){ return is_site(x,y); };
+
+  Idx x1 = 1, y1 = 0, x2 = Lx/2+1, y2 = Lx/2;
+
   Obs<Corr> ss_corr( "ss_corr", binsize, [](const Spin& s0){ return Corr( s0.ss_corr() ); }, pt_corr);
   corrs.push_back( &ss_corr );
   Obs<Scalar> eps_1pt( "eps_1pt", binsize, [](const Spin& s0){ return Scalar( s0.eps_1pt() ); } );
   scalars.push_back( &eps_1pt );
   Obs<Corr> epseps_corr( "epseps_corr", binsize, [](const Spin& s0){ return Corr( s0.epseps_corr() ); }, face_corr );
   corrs.push_back( &epseps_corr );
-  // Obs<Scalar> TA( "TA", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(0) ); } );
-  // scalars.push_back( &TA );
-  // Obs<Scalar> TB( "TB", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(1) ); } );
-  // scalars.push_back( &TB );
-  // Obs<Scalar> TC( "TC", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(2) ); } );
-  // scalars.push_back( &TC );
+  Obs<Scalar> TA( "TA", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(0) ); } );
+  scalars.push_back( &TA );
+  Obs<Scalar> TB( "TB", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(1) ); } );
+  scalars.push_back( &TB );
+  Obs<Scalar> TC( "TC", binsize, [](const Spin& s0){ return Scalar( s0.TM_1pt(2) ); } );
+  scalars.push_back( &TC );
 
-  // Obs<Corr> TATA( "TATA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,0) ); } );
-  // corrs.push_back( &TATA );
-  // Obs<Corr> TATB( "TATB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,1) ); } );
-  // corrs.push_back( &TATB );
-  // Obs<Corr> TATC( "TATC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,2) ); } );
-  // corrs.push_back( &TATC );
-  // Obs<Corr> TBTA( "TBTA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,0) ); } );
-  // corrs.push_back( &TBTA );
-  // Obs<Corr> TBTB( "TBTB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,1) ); } );
-  // corrs.push_back( &TBTB );
-  // Obs<Corr> TBTC( "TBTC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,2) ); } );
-  // corrs.push_back( &TBTC );
-  // Obs<Corr> TCTA( "TCTA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,0) ); } );
-  // corrs.push_back( &TCTA );
-  // Obs<Corr> TCTB( "TCTB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,1) ); } );
-  // corrs.push_back( &TCTB );
-  // Obs<Corr> TCTC( "TCTC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,2) ); } );
-  // corrs.push_back( &TCTC );
+  Obs<Corr> TATA( "TATA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,0) ); }, pt_corr );
+  corrs.push_back( &TATA );
+  Obs<Corr> TATB( "TATB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,1) ); }, pt_corr );
+  corrs.push_back( &TATB );
+  Obs<Corr> TATC( "TATC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(0,2) ); }, pt_corr );
+  corrs.push_back( &TATC );
+  Obs<Corr> TBTA( "TBTA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,0) ); }, pt_corr );
+  corrs.push_back( &TBTA );
+  Obs<Corr> TBTB( "TBTB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,1) ); }, pt_corr );
+  corrs.push_back( &TBTB );
+  Obs<Corr> TBTC( "TBTC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(1,2) ); }, pt_corr );
+  corrs.push_back( &TBTC );
+  Obs<Corr> TCTA( "TCTA", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,0) ); }, pt_corr );
+  corrs.push_back( &TCTA );
+  Obs<Corr> TCTB( "TCTB", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,1) ); }, pt_corr );
+  corrs.push_back( &TCTB );
+  Obs<Corr> TCTC( "TCTC", binsize, [](const Spin& s0){ return Corr( s0.TMTN_corr(2,2) ); }, pt_corr );
+  corrs.push_back( &TCTC );
 
-  // Obs<Corr> TA_ss( "TA_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(0, x1, y1, x2, y2) ); } );
-  // corrs.push_back( &TA_ss );
-  // Obs<Corr> TB_ss( "TB_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(1, x1, y1, x2, y2) ); } );
-  // corrs.push_back( &TB_ss );
-  // Obs<Corr> TC_ss( "TC_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(2, x1, y1, x2, y2) ); } );
-  // corrs.push_back( &TC_ss );
+  Obs<Corr> TA_ss( "TA_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(0, x1, y1, x2, y2) ); }, on_site );
+  corrs.push_back( &TA_ss );
+  Obs<Corr> TB_ss( "TB_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(1, x1, y1, x2, y2) ); }, on_site );
+  corrs.push_back( &TB_ss );
+  Obs<Corr> TC_ss( "TC_ss", binsize, [x1,y1,x2,y2](const Spin& s0){ return Corr( s0.TM_ss_corr(2, x1, y1, x2, y2) ); }, on_site );
+  corrs.push_back( &TC_ss );
   //----------------------------
 
 
