@@ -15,15 +15,14 @@ int main( int argc, char *argv[] ){
   int init_label = 0;
   bool if_read = false;
   // bool if_read = true;
-  // if (argc>1){
-  //   mult = atoi(argv[1]);
-  //   Lx = 3*mult; // 12
-  //   Ly = 3*mult;
-  // }
-  // if (argc>2){
-  //   if_read=true;
-  //   init_label = atoi(argv[2]);
-  // }
+  // const int binsize = 1e5;
+  int binsize = 1e4;
+  if (argc>1){
+    mult = atoi(argv[1]);
+    binsize = atoi(argv[2]);
+  }
+  Lx = 3*mult; // 12
+  Ly = 3*mult;
 
   std::cout << std::scientific << std::setprecision(15);
   std::cout << "int = " << std::numeric_limits<int>::digits10 << std::endl;
@@ -44,8 +43,7 @@ int main( int argc, char *argv[] ){
   std::filesystem::create_directories( configdir );
 
   // routine
-  const int Nbin = 1e2;
-  const int binsize = 1e4;
+  const int Nbin = 1e4;
 
   const bool if_write = true;
 

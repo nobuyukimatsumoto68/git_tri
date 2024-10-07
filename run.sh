@@ -8,7 +8,7 @@
 #$ -M nmatsum@bu.edu
 ##### run time limit. format: hh:mm:ss; default 12 hrs
 #$ -l h_rt=24:00:00
-#$ -pe omp 4
+#$ -pe omp 8
 
 # --------- job info -----------#
 
@@ -30,9 +30,6 @@ module load gcc/13.2.0
 
 echo "running program"
 pwd
-# echo ${mult} ${start}
-# ./wolff.o ${mult} ${start}
 echo ${mult}
-# ./wolff.o ${mult}
-./${app}
+./${app} ${mult} ${binsize}
 echo "finished"

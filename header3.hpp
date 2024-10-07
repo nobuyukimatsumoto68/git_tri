@@ -36,13 +36,14 @@ const double arg_tautil = 4.0/9.0 * M_PI; // pi/3.0 <= arg <= pi/2.0 // 3.35
 double divs[3] = {0.23088000672608802, 0.2643308099111132, 0.24271706104663027};
 double div_eps = 0.7560526776531903;
 
+
 const bool tautil_default = false; // true->below
 double tautil1 = 0.3420201433256688;
 double tautil2 = 0.9396926207859083 + 0.00001;
 
 
 
-int mult = 6; // even
+int mult = 4; // even
 // int mult = 2;
 Idx Lx = 3*1*mult; // 12
 Idx Ly = 3*1*mult;

@@ -19,8 +19,8 @@ DIR = ./
 wolff.o: wolff_tri.cc header3.hpp
 	$(CXX) $< $(INCLUDES) $(LDFLAGS) $(CXXFLAGS) -o $(DIR)$@
 
-# wolff2.o: wolff_hex2.cc header2.hpp
-# 	$(CXX) $< $(INCLUDES) $(LDFLAGS) $(CXXFLAGS) -o $(DIR)$@
+wolff2.o: wolff_tri.cc header3.hpp
+	$(CXX) $< $(INCLUDES) $(LDFLAGS) $(CXXFLAGS) -o $(DIR)$@
 
 # test.o: wolff_hex.cc header.hpp
 # 	$(CXX) $< $(INCLUDES) $(LDFLAGS) $(CXXFLAGS2) -pg -o $(DIR)$@
