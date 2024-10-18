@@ -13,7 +13,7 @@
 int main( int argc, char *argv[] ){
 
   int init_label = 0;
-  bool if_read = false;
+  bool if_read = true;
   // bool if_read = true;
   // const int binsize = 1e5;
   int binsize = 1e4;

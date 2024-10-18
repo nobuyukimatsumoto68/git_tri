@@ -26,15 +26,15 @@ constexpr int TWO = 2;
 constexpr int THREE = 3;
 constexpr int SIX = 6;
 
-// const double abs_tautil = 1.0; // 1.0 <= abs
-// const double arg_tautil = 3.0/9.0 * M_PI; // pi/3.0 <= arg <= pi/2.0 // 3.35
-// double divs[3] = {0.25, 0.25, 0.25};
-// double div_eps = 0.75;
+const double abs_tautil = 1.0; // 1.0 <= abs
+const double arg_tautil = 3.0/9.0 * M_PI; // pi/3.0 <= arg <= pi/2.0 // 3.35
+double divs[3] = {0.25, 0.25, 0.25};
+double div_eps = 0.75;
 
-const double abs_tautil = 1.2; // 1.0 <= abs
-const double arg_tautil = 4.0/9.0 * M_PI; // pi/3.0 <= arg <= pi/2.0 // 3.35
-double divs[3] = {0.23088000672608802, 0.2643308099111132, 0.24271706104663027};
-double div_eps = 0.7560526776531903;
+// const double abs_tautil = 1.2; // 1.0 <= abs
+// const double arg_tautil = 4.0/9.0 * M_PI; // pi/3.0 <= arg <= pi/2.0 // 3.35
+// double divs[3] = {0.23088000672608802, 0.2643308099111132, 0.24271706104663027};
+// double div_eps = 0.7560526776531903;
 
 
 const bool tautil_default = false; // true->below
@@ -50,7 +50,7 @@ Idx Ly = 3*1*mult;
 
 // constexpr Idx Lx = 6*4; // 12
 // constexpr Idx Ly = 2*Lx;
-constexpr int nparallel = 8; // 4; //12
+constexpr int nparallel = 4; // 4; //12
 
 
 constexpr int nu = 1; // PP, PA, AA, AP

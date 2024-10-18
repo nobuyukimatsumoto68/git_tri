@@ -7,8 +7,8 @@
 #$ -P qfe
 #$ -M nmatsum@bu.edu
 ##### run time limit. format: hh:mm:ss; default 12 hrs
-#$ -l h_rt=24:00:00
-#$ -pe omp 8
+#$ -l h_rt=6:00:00
+#$ -pe omp 4
 
 # --------- job info -----------#
 

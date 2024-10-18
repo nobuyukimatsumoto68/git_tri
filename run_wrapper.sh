@@ -2,8 +2,8 @@
 
 module load gcc/13.2.0
 
-# app='wolff.o'
-app='wolff2.o'
+app='wolff.o'
+# app='wolff2.o'
 make ${app}
 
 ns=(4 6 8 10) # 1e5, omp 4
